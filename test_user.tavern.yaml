@@ -1,0 +1,100 @@
+test_name: Create new user
+
+stages:
+  - name: Create a user
+    request:
+      url: http://localhost/create_user
+      json:
+        user_name: adam
+        password: john
+        active_status: 1
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+      body:
+        message: User Created successfully
+
+---
+
+test_name: Change the user’s password
+
+stages:
+  - name: Change the user’s password
+    request:
+      url: http://localhost/change_password
+      auth:
+        - adam
+        - john
+      json:
+        user_name: adam
+        old_password: john
+        password: john1
+      method: PATCH
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+      body:
+        message: Password Updated SucessFully
+---
+
+test_name: Delete the user
+
+stages:
+  - name: Delete the user
+    request:
+      url: http://localhost/delete_user
+      auth:
+        - adam
+        - john1
+
+      method: DELETE
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+      body:
+        message: User deleted successfully
+---
+
+  test_name: Try to change the password for the deleted user
+
+  stages:
+    - name: Try to change the password for the deleted user
+      request:
+        url: http://localhost/change_password
+        auth:
+          - adam
+          - john1
+        json:
+          user_name: adam
+          old_password: john1
+          password: john
+        method: PATCH
+        headers:
+          content-type: application/json
+      response:
+        status_code: 401
+---
+
+test_name: Try to change the password for a user that does not exist
+
+stages:
+  - name: Try to change the password for a user that does not exist
+    request:
+      url: http://localhost/change_password
+      auth:
+        - panda
+        - express
+      json:
+        user_name: panda
+        old_password: express
+        password: express1
+      method: PATCH
+      headers:
+        content-type: application/json
+    response:
+      status_code: 401
+---

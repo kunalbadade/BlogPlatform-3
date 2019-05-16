@@ -1,0 +1,60 @@
+test_name: Add another tag to the article
+
+stages:
+  - name: Add another tag to the article
+    request:
+      url: http://localhost/new_tag/9
+      method: POST
+      json:
+        tags: ["tag40","tag41"]
+      auth:
+        - kunal
+        - kunal
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+---
+
+test_name: List all articles with the new tag
+stages:
+  - name: List all articles with the new tag
+    request:
+      url: http://localhost/get_articles_for_tag/Batman
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+---
+test_name: Delete one of the tags from the article
+
+stages:
+  - name: Delete one of the tags from the article
+    request:
+      url: http://localhost/remove_tags/1
+      method: DELETE
+      json:
+        tag_id: 3
+      auth:
+        - kunal
+        - kunal
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+---
+test_name: Add an article with a new tag
+
+stages:
+  - name: Add an article with a new tag
+    request:
+      url: http://localhost/new_tag/8
+      method: POST
+      json:
+        tags: ["tag25","tag26"]
+      headers:
+        content-type: application/json
+    response:
+      status_code: 401
+---

@@ -1,0 +1,47 @@
+test_name: Post an anonymous comment on an article
+
+stages:
+  - name: Create a comment with anonymous user
+    request:
+      url: http://localhost/new_comment
+      json:
+        article_id: 8
+        comment_content: Comment10
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+---
+test_name: Check that the comments in article are returned in chronological order
+
+stages:
+  - name: Make sure that the comments belonging to particular article are retrieved in chronological order
+    request:
+      url: http://localhost/comments/getncomments/8
+      json:
+        n: 3
+      method: GET
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+---
+test_name: Post an authenticated comment on an article
+
+stages:
+  - name: Create a comment with an authenticated user
+    request:
+      url: http://localhost/new_comment
+      json:
+        article_id: 8
+        comment_content: Comment20
+      auth:
+        - kunal
+        - kunal
+      method: POST
+      headers:
+        content-type: application/json
+    response:
+        status_code: 201
+---

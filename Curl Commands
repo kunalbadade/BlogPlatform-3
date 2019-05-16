@@ -1,0 +1,87 @@
+Articles.py
+
+DELETE
+Correct password
+
+curl -u kunal:kunal --include --verbose --request DELETE --header 'Content-Type: application/json'  http://localhost/articles/delete/4
+
+Incorrect password
+curl -u kunal:aasas --include --verbose --request DELETE --header 'Content-Type: application/json'  http://localhost/articles/delete/4
+
+POST
+
+curl -u kunal:kunal --include --verbose --request POST --header 'Content-Type: application/json' --data '{"article_content":"Harley","article_title":"Quinn"}' http://localhost/new_article
+
+GET
+
+Content of specific article
+
+curl -u kunal:kunal --include --verbose --request GET --header 'Content-Type: application/json' http://localhost/articles/get/2
+
+content of n articles
+
+curl --include --verbose --request GET --header 'Content-Type: application/json' --data '{"n":"3"}' http://localhost/articles
+
+Metadata of n articles
+
+curl --include --verbose --request GET --header 'Content-Type: application/json' --data '{"n":"3"}' http://localhost/articles_metadata
+
+PUT
+
+curl -u kunal:kunal --include --verbose --request PUT --header 'Content-Type: application/json' --data '{"article_title":"SomethingFancy","article_content":"SomethingFancy"}' http://localhost/articles/update/5
+
+curl -u kunal:k --include --verbose --request PUT --header 'Content-Type: application/json' --data '{"article_title":"nt":"SomethingFancy"}' http://localhost/articles/update/5
+
+
+User.py
+
+Create User
+
+curl --include --verbose --request POST --header 'Content-Type: application/json' --data '{"user_name" : "Heath", "password" : "Ledger"}' http://localhost/create_user
+
+
+Delete User
+curl -u kunal:kunal --include --verbose --request DELETE --header 'Content-Type: application/json' http://localhost/delete_user
+
+Change Password
+curl -u Heath:Ledger -i --request PATCH --header 'Content-Type: application/json' --data '{"user_name" : "Heath","old_password" : "Ledger", "password" : "Joker"}' http://localhost/change_password
+
+
+Tags.py
+
+New Tag
+curl --include -u kunal:kunal --verbose --request POST --header 'Content-Type: application/json' --data '{"tags":["NavinTag1","NavinTag2"]}' http://localhost/new_tag/1
+
+Remove Tag
+curl -u kunal:kunal --include --verbose --request DELETE --header 'Content-Type: application/json' http://localhost/remove_tags/6
+
+Get Articles For Tag
+curl -u kunal:kunal --include --verbose --request GET --header 'Content-Type: application/json' http://localhost/get_articles_for_tag/1
+
+Get Tags
+curl -u kunal:kunal --include --verbose --request GET --header 'Content-Type: application/json' http://localhost/get_tags/1
+
+
+Comments.py
+
+New Comment
+curl --include --verbose --request POST --header 'Content-Type: application/json' --data '{"article_id":"2","comment_content":"NavinComment1"}' http://localhost/new_comment
+
+Get comment count
+curl --include --verbose --request GET --header 'Content-Type: application/json' http://localhost/comments/getcommentcount/1
+
+Get n comments
+curl --include --verbose --request GET --data '{"n":"2"}' --header 'Content-Type: application/json' http://localhost/comments/getncomments/1
+
+Delete Comment
+curl -u kunal:kunal --include --verbose --request DELETE --header 'Content-Type: application/json' --data '{"article_id":"2"}' http://localhost/comments/delete/21
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+docker start scylla
+
+docker exec -it scylla nodetool status
+
+docker exec -it scylla cqlsh
+

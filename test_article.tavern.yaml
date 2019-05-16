@@ -1,0 +1,66 @@
+test_name: Try to post an article without authenticating
+
+stages:
+  - name: Try to post an article without authenticating
+    request:
+      url: http://localhost/new_article
+      method: POST
+      json:
+        article_content: MyNewContent
+        article_title: MyNewTitle
+      headers:
+        content-type: application/json
+    response:
+      status_code: 401
+---
+
+test_name: Try to post an article using the wrong password
+
+stages:
+  - name: Try to post an article using the wrong password
+    request:
+      url: http://localhost/new_article
+      method: POST
+      auth:
+        - kunal
+        - john
+      json:
+        article_content: MyNewContent
+        article_title: MyNewTitle
+      headers:
+        content-type: application/json
+    response:
+      status_code: 401
+---
+test_name: Post an article successfully
+
+stages:
+  - name: Post an article successfully
+    request:
+      url: http://localhost/new_article
+      method: POST
+      auth:
+        - kunal
+        - kunal
+      json:
+        article_content: MyNewContent21
+        article_title: MyNewTitle21
+      headers:
+        content-type: application/json
+    response:
+      status_code: 201
+---
+test_name: Retrieve the newly posted article
+
+stages:
+  - name: Retrieve the newly posted article
+    request:
+      url: http://localhost/articles
+      method: GET
+      json:
+        n: 1
+      headers:
+        content-type: application/json
+    response:
+      status_code: 200
+---
