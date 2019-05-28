@@ -19,3 +19,7 @@ The primary tasks were:
 -Implement HTTP Caching,
 
 -Generating RSS feed using rfeed.
+
+This project inspired me to write an article on NGINX configuration for Load balancing and HTTP Authentication
+
+https://medium.com/@kunal.s.badade/simple-http-load-balancing-and-subrequest-authentication-with-nginx-b3a6d9cfa6c0
