@@ -1,6 +1,5 @@
 # BlogPlatform-3
-This will be the third and final phase of Web backend Engineering (CPSC 476) class.
-This is second phase of Blog Platform. Details provided by our professor can be found here: 
+This will be the third and final phase of Web backend Engineering (CPSC 476) class. Details provided by our professor can be found here: 
 
 https://docs.google.com/document/d/17jtWi9S-ck0Nwgq6kQzOO3XBUt5NI4-phMP5yWuJGcY/edit#heading=h.psch36iuyxbz
 
